@@ -15,7 +15,9 @@ license = { text = "BSD-2-Clause" }
 dependencies = [
   "pandas",
   "numpy",
-  "scikit-learn"
+  "scikit-learn",
+  "plotly",
+  "jinja2"
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",

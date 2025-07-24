@@ -18,6 +18,7 @@ build/
 # Failprint generated
 failprint.log
 reports/*.md
+reports/*.html
 
 # OS
 .DS_Store

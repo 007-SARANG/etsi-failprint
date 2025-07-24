@@ -35,9 +35,13 @@ class ReportWriter:
         return "\n".join(md)
 
     def generate_html(self):
-        import plotly.graph_objs as go
-        import pandas as pd
-        from jinja2 import Environment, FileSystemLoader, select_autoescape
+        try:
+            import plotly.graph_objs as go
+            import pandas as pd
+            from jinja2 import Environment, FileSystemLoader, select_autoescape
+        except ImportError as e:
+            missing_pkg = str(e).split("'")[1] if "'" in str(e) else "unknown"
+            raise ImportError(f"HTML output requires additional dependencies. Install with: pip install {missing_pkg}") from e
 
         # Summary
         misclass_pct = round((self.failures / self.total) * 100, 2) if self.total else 0
