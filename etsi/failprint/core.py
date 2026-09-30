@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+from typing import Optional
 from .segmenter import segment_failures
 from .cluster import cluster_failures
 from .correlate import compute_drift_correlation
@@ -11,7 +12,7 @@ def analyze(X: pd.DataFrame, y_true: pd.Series, y_pred: pd.Series,
             cluster: bool = True,
             drift_scores: dict = None,
             output: str = "markdown",
-            log_path: str = "failprint.log"):
+            log_path: Optional[str] = None):
 
     assert len(X) == len(y_true) == len(y_pred), "Data length mismatch."
 

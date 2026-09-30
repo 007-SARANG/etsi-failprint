@@ -13,13 +13,6 @@ class ReportWriter:
         self.failures = failures
         self.timestamp = timestamp
 
-        os.makedirs("reports", exist_ok=True)
-        if not os.path.exists("failprint.log"):
-            open("failprint.log", "w").close()
-            print("[failprint] Created failprint.log")
-        if not os.path.exists("reports/failprint_report.md"):
-            open("reports/failprint_report.md", "w").close()
-            print("[failprint] Created reports/failprint_report.md")
 
     def generate_markdown(self):
         md = [f"# failprint Report",
@@ -36,8 +29,13 @@ class ReportWriter:
 
     def write(self):
         markdown = self.generate_markdown()
+        os.makedirs("reports", exist_ok=True)
         with open("reports/failprint_report.md", "w", encoding="utf-8") as f:
             f.write(markdown + "\n\n")
-        with open(self.log_path, "a", encoding="utf-8") as log:
-            log.write(f"[{self.timestamp}] Failures: {self.failures}/{self.total}\n")
+        if self.log_path:
+            log_parent = os.path.dirname(self.log_path)
+            if log_parent:
+                os.makedirs(log_parent, exist_ok=True)
+            with open(self.log_path, "a", encoding="utf-8") as log:
+                log.write(f"[{self.timestamp}] Failures: {self.failures}/{self.total}\n")
         return markdown
