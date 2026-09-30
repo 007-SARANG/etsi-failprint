@@ -22,3 +22,8 @@ reports/*.md
 # OS
 .DS_Store
 Thumbs.db
+# Generated files
+node_modules/
+**/dist/
+__pycache__/
+*.py[cod]
