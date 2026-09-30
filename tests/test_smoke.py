@@ -11,6 +11,6 @@ def test_analyze_writes_report_without_default_log(tmp_path, monkeypatch):
 
     report = analyze(features, y_true, y_pred, cluster=False)
 
-    assert "Failures: 2/4" in report
+    assert "Failures: 2 (50.00%)" in report
     assert (tmp_path / "reports" / "failprint_report.md").exists()
     assert not (tmp_path / "failprint.log").exists()
